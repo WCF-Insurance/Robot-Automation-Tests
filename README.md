@@ -1,7 +1,14 @@
 # WCF QA Robot
 
 ## Installation
+
+This setup assumes that you want to use pyenv to handle python versioning and virtual environments.
+This will create a virtual environment using Python 3.7.3 and isolate it for this repo:
+
 ```
+brew install pyenv
+brew install pyenv-virtualenv
+pyenv install 3.7.3
 pyenv local 3.7.3
 pyenv virtualenv wcf_qa
 pyenv activate wcf_qa
