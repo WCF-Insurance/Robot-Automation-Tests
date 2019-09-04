@@ -34,7 +34,7 @@ On the mac once you download the new driver you just unzip it and move it to `/u
 https://github.com/xyb/robotframework-debuglibrary
 
 ## Resources
-https://robotframework.org/
-http://robotframework.org/Selenium2Library/Selenium2Library.html
-https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
-http://randomvin.com/
+- https://robotframework.org/
+- http://robotframework.org/Selenium2Library/Selenium2Library.html
+- https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
+- http://randomvin.com/
