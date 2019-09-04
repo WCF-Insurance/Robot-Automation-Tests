@@ -4,8 +4,11 @@ Documentation     A resource file with reusable keywords and variables.
 ...               The system specific keywords created here form our own
 ...               domain specific language. They utilize keywords provided
 ...               by the imported SeleniumLibrary.
+Library           Collections
+Library           String
 Library           Selenium2Library
 Library           DebugLibrary
+Library           capture_logs.py
 
 *** Variables ***
 ${SERVER}             bc.wcf.com
@@ -93,7 +96,9 @@ Coverage Review
 
 Click Next
     Wait Until Element Is Not Visible    class:hc-spinner-container    timeout=60
+    Check For Severe JS Error
     Click Button    Next
+    Check For Severe JS Error
 
 Type Text
     [Arguments]   ${LOCATOR}    ${TEXT}
@@ -108,3 +113,17 @@ Click Item
     Wait Until Page Contains Element    ${LOCATOR}
     Click Element    ${LOCATOR}
     Wait Until Element Is Not Visible    class:hc-spinner-container    timeout=60
+
+Get All Console Logs
+    [Return]  ${log_msg}
+    ${log_msg}=    get_selenium_browser_log
+    # ${error_message}=    Get From Dictionary    ${last_error}    message
+
+Get Last Console Log
+    [Return]  ${last_error}
+    ${last_error}=    get_last_browser_log
+
+Check For Severe JS Error
+    ${last_error}=    Get Last Console Log
+    Log    ${last_error}
+    Dictionary Should Not Contain Value    ${last_error}    SEVERE
