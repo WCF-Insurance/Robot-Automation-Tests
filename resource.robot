@@ -13,12 +13,15 @@ Library           capture_logs.py
 *** Variables ***
 ${SERVER}             bc.wcf.com
 ${BROWSER}            Chrome
+# ${BROWSER}            Firefox
 ${AUTO URL}           http://${SERVER}/quote/auto/123
 
 
 *** Keywords ***
 Load Commercial Auto Page
     Open Browser   ${AUTO URL}   ${BROWSER}
+#   give time (on Windows) for pswd pop-up to load
+    Sleep           18 seconds 
     Maximize Browser Window
     Title Should Be    Quote
 
