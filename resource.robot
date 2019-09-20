@@ -10,18 +10,23 @@ Library           Selenium2Library
 Library           DebugLibrary
 Library           capture_logs.py
 
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+
 *** Variables ***
-${SERVER}             bc.wcf.com
-${BROWSER}            Chrome
-# ${BROWSER}            Firefox
-${AUTO URL}           http://${SERVER}/quote/auto/123
+${SERVER}  bc.wcf.com
+${BROWSER}  Chrome
+# ${BROWSER}  Firefox
+${AUTO URL}  http://${SERVER}/quote/auto/123
 
 
 *** Keywords ***
 Load Commercial Auto Page
+    Set Log Level  TRACE
     Open Browser   ${AUTO URL}   ${BROWSER}
+
 #   give time (on Windows) for pswd pop-up to load
-    Sleep           18 seconds 
+    Sleep           20 seconds 
     Maximize Browser Window
     Title Should Be    Quote
 
@@ -44,6 +49,7 @@ Add Business Information
     Type Text    xpath=(//input)[6]    1954
     Type Text    xpath=(//input)[7]    Corporation
     Type Text    xpath=(//input)[8]    abcdefg
+    # Log to console  ASE_CommAuto_BasicQuote-Add Business Information
     Click Next
 
 Accept Defaults On Insurance Information
@@ -51,6 +57,10 @@ Accept Defaults On Insurance Information
 
 Go To Vehicle
     Click Item    class:button
+
+Skip to Drivers via NavBar
+    # Click Drivers in NavBar
+    Click Item  xpath=(//hc-progress-bar/div/div[4]/div/div)[1]
 
 Add A Vehicle
     Type Text    xpath=(//input)[3]    1D7RV1GP8BS537309
@@ -99,7 +109,7 @@ Coverage Review
 
 Click Next
     Wait Until Element Is Not Visible    class:hc-spinner-container    timeout=60
-    Check For Severe JS Error
+    # Check For Severe JS Error
     Click Button    Next
     Check For Severe JS Error
 
@@ -120,7 +130,7 @@ Click Item
 Get All Console Logs
     [Return]  ${log_msg}
     ${log_msg}=    get_selenium_browser_log
-    # ${error_message}=    Get From Dictionary    ${last_error}    message
+    ${error_message}=    Get From Dictionary    ${last_error}    message
 
 Get Last Console Log
     [Return]  ${last_error}
@@ -129,4 +139,5 @@ Get Last Console Log
 Check For Severe JS Error
     ${last_error}=    Get Last Console Log
     Log    ${last_error}
-    Dictionary Should Not Contain Value    ${last_error}    SEVERE
+    Run Keyword And Continue On Failure  Dictionary Should Not Contain Value  ${last_error}  SEVERE
+    # Dictionary Should Not Contain Value    ${last_error}    SEVERE
