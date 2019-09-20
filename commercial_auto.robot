@@ -11,9 +11,10 @@ Commercial Auto Happy Path
     Add Business Information
     Accept Defaults On Insurance Information
     Go To Vehicle
-    Add A Vehicle
+    # Add A Vehicle
+    Skip to Drivers via NavBar
     Add Vehicle Coverages
     Add Driver
     Add General Info
     Coverage Review
-    [Teardown]    Close Browser
+    # [Teardown]    Close Browser
